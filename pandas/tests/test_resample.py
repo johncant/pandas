@@ -1157,8 +1157,9 @@ class TestDatetimeIndex(Base):
         expected_downsample = Series([s[0], s[1:6].mean(),
                                       s[6:11].mean(), s[11:].mean()],
                                      index=idx + timedelta(minutes=1))
+        # GH 20744
         expected_upsample = Series([s[0], s[5], s[10], s[-1]],
-                                   index=idx + timedelta(minutes=1)) # GH 20744
+                                   index=idx + timedelta(minutes=1))
 
         # loffset should work for upsample and downsample
         result_downsample = s.resample('5min', closed='right', label='right',
